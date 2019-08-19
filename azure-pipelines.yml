@@ -26,10 +26,7 @@ steps:
     outputDirectory: '$(outputDirectory)'
     configuration: '$(buildConfiguration)'
 
-- task: ArchiveFiles@2
+- task: AndroidSigning@3
   inputs:
-    rootFolderOrFile: '$(Build.BinariesDirectory)'
-    includeRootFolder: true
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-    replaceExistingArchive: true
+    apkFiles: '**/*.apk'
+    apksign: false
