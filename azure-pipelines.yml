@@ -36,15 +36,10 @@ steps:
     apksignerKeyPassword: '123456'
     zipalign: true
 
-- task: CopyFiles@2
+- task: ArchiveFiles@2
   inputs:
-    SourceFolder: $(Build.SourcesDirectory)
-    contents: '**/*.apk' 
-    targetFolder: '$(build.artifactStagingDirectory)'
-    overWrite: true
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'apkFiles'
-    publishLocation: 'Container'
+    rootFolderOrFile: '$(Build.BinariesDirectory)'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
