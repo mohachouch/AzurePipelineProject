@@ -29,7 +29,6 @@ steps:
 - task: AndroidSigning@3
   inputs:
     apkFiles: '**/*.apk'
-    apksign: false
 
 - task: CopyFiles@2
   inputs:
