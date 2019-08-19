@@ -34,7 +34,6 @@ steps:
     apksignerKeystorePassword: '123456'
     apksignerKeystoreAlias: 'key0'
     apksignerKeyPassword: '123456'
-    apksignerArguments: --out $(Build.SourcesDirectory)/app/build/outputs/apk/release/my-crazy-app.release.apk
     zipalign: true
 
 - task: CopyFiles@2
@@ -46,6 +45,6 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathtoPublish: '$(Build.ArtifactStagingDirectory)/app/build/outputs/apk/release/'
-    artifactName: 'apks' 
-    publishLocation: 'container'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
