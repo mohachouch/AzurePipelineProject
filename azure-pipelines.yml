@@ -29,13 +29,23 @@ steps:
 - task: AndroidSigning@3
   inputs:
     apkFiles: '**/*.apk'
+    apksign: true
     apksignerKeystoreFile: 'samplekey'
     apksignerKeystorePassword: '123456'
     apksignerKeystoreAlias: 'key0'
     apksignerKeyPassword: '123456'
+    apksignerArguments: --out $(Build.SourcesDirectory)/app/build/outputs/apk/release/my-crazy-app.release.apk
+    zipalign: true
 
 - task: CopyFiles@2
   inputs:
-    contents: '**/*.apk'
+    SourceFolder: $(Build.SourcesDirectory)
+    contents: '**/*.release.apk' 
     targetFolder: '$(build.artifactStagingDirectory)'
+    overWrite: true
+
 - task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)/app/build/outputs/apk/release/'
+    artifactName: 'apks' 
+    publishLocation: 'container'
